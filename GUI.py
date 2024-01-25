@@ -275,10 +275,10 @@ def select_mario_folder():
     scaling_factor = (16/9) / (int(numerator_entry.get()) / int(denominator_entry.get()))
     username = getpass.getuser()
     if output_yuzu.get() is True:
-        input_folder = f"C:/Users/{username}/AppData/Roaming/yuzu/load/0100000000010000"
+        input_folder = f"C:/Users/{username}/AppData/Roaming/yuzu/load/010028600EBDA000"
         process_name = "yuzu.exe"
     if output_ryujinx.get() is True:
-        input_folder = f"C:/Users/{username}/AppData/Roaming/Ryujinx/mods/contents/0100000000010000"
+        input_folder = f"C:/Users/{username}/AppData/Roaming/Ryujinx/mods/contents/010028600EBDA000"
         process_name = "ryujinx.exe"
     else:
         process_name = "yuzu.exe"
