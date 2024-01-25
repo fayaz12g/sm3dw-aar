@@ -35,10 +35,10 @@ from controller import controller_files
 #### Create Window ####
 #######################
 
-tool_version = "1.4.1"
+tool_version = "1.0.0"
 
 root = customtkinter.CTk()
-root.title(f"Fayaz's Settings {tool_version} for Super Mario Odyssey")
+root.title(f"Fayaz's Settings {tool_version} for Super Mario 3D World + Bowser's Fury")
 root.geometry("500x720")
 
 customtkinter.set_appearance_mode("system")
