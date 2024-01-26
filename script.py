@@ -24,7 +24,14 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
         print(f"{command} {pane} of {filename}")
         offset_dict = {'shift_x': 0x40, 'shift_y': 0x48, 'scale_x': 0x70, 'scale_y': 0x78} 
         modified_name = filename + "_name"
-        full_path_of_file = file_paths.get(modified_name)
+        if filename == "CourseSelectSceneLayout":
+            full_path_of_file = os.path.join(unpacked_folder, 'romfs', 'LayoutData', 'CourseSelectSceneLayout', 'layout', 'blyt', 'CourseSelectSceneLayout.bflyt')
+        elif filename == "StageSceneLayout":
+            full_path_of_file = os.path.join(unpacked_folder, 'romfs', 'LayoutData', 'StageSceneLayout', 'layout', 'blyt', 'StageSceneLayout.bflyt')
+        elif filename == "SingleModeSceneLayout":
+            full_path_of_file = os.path.join(unpacked_folder, 'romfs', 'LayoutData', 'SingleModeSceneLayout', 'layout', 'blyt', 'SingleModeSceneLayout.bflyt')
+        else:
+            full_path_of_file = file_paths.get(modified_name)
         with open(full_path_of_file, 'rb') as f:
             content = f.read().hex()
         start_rootpane = content.index(b'RootPane'.hex())
@@ -127,11 +134,11 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
 
         if HUD_pos == 'corner':
             print("Shifitng elements for corner HUD")
-            # patch_blyt('SingleModeSceneLayout', 'CounterCoin', 'shift_x', -660*s2) 
-            # patch_blyt('SingleModeSceneLayout', 'CounterGoalItem', 'shift_x', -660*s2) 
-            # patch_blyt('SingleModeSceneLayout', 'CounterScenarioShine', 'shift_x', -660*s2) 
-            # patch_blyt('SingleModeSceneLayout', 'ChallengeTimner', 'shift_x', -660*s2) 
-            # patch_blyt('SingleModeSceneLayout', 'Menu', 'shift_x', 660*s2) 
+            patch_blyt('SingleModeSceneLayout', 'CounterCoin', 'shift_x', -660*s2) 
+            patch_blyt('SingleModeSceneLayout', 'CounterGoalItem', 'shift_x', -660*s2) 
+            patch_blyt('SingleModeSceneLayout', 'CounterScenarioShine', 'shift_x', -660*s2) 
+            patch_blyt('SingleModeSceneLayout', 'ChallengeTimer', 'shift_x', -660*s2) 
+            patch_blyt('SingleModeSceneLayout', 'Menu', 'shift_x', 660*s2) 
             patch_blyt('CourseSelectSceneLayout', 'Menu', 'shift_x', 660*s2) 
             patch_blyt('CourseSelectSceneLayout', 'World', 'shift_x', -660*s2) 
             patch_blyt('CourseSelectSceneLayout', 'Counters', 'shift_x', -660*s2) 
