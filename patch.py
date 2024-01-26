@@ -15,7 +15,6 @@ def create_patch_files(patch_folder, ratio_value, scaling_factor, visual_fixes):
 
     visual_fixesa = visual_fixes[0]
     visual_fixesb = visual_fixes[1]
-    visual_fixesc = visual_fixes[2]
     scaling_factor = float(scaling_factor)
     ratio_value = float(ratio_value)
     print(f"The scaling factor is {scaling_factor}.")
