@@ -127,11 +127,11 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
 
         if HUD_pos == 'corner':
             print("Shifitng elements for corner HUD")
-            patch_blyt('SingleModeSceneLayout', 'CounterCoin', 'shift_x', -660*s2) 
-            patch_blyt('SingleModeSceneLayout', 'CounterGoalItem', 'shift_x', -660*s2) 
-            patch_blyt('SingleModeSceneLayout', 'CounterScenarioShine', 'shift_x', -660*s2) 
-            patch_blyt('SingleModeSceneLayout', 'ChallengeTimner', 'shift_x', -660*s2) 
-            patch_blyt('SingleModeSceneLayout', 'Menu', 'shift_x', 660*s2) 
+            # patch_blyt('SingleModeSceneLayout', 'CounterCoin', 'shift_x', -660*s2) 
+            # patch_blyt('SingleModeSceneLayout', 'CounterGoalItem', 'shift_x', -660*s2) 
+            # patch_blyt('SingleModeSceneLayout', 'CounterScenarioShine', 'shift_x', -660*s2) 
+            # patch_blyt('SingleModeSceneLayout', 'ChallengeTimner', 'shift_x', -660*s2) 
+            # patch_blyt('SingleModeSceneLayout', 'Menu', 'shift_x', 660*s2) 
             patch_blyt('CourseSelectSceneLayout', 'Menu', 'shift_x', 660*s2) 
             patch_blyt('CourseSelectSceneLayout', 'World', 'shift_x', -660*s2) 
             patch_blyt('CourseSelectSceneLayout', 'Counters', 'shift_x', -660*s2) 
