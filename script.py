@@ -24,12 +24,8 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
         print(f"{command} {pane} of {filename}")
         offset_dict = {'shift_x': 0x40, 'shift_y': 0x48, 'scale_x': 0x70, 'scale_y': 0x78} 
         modified_name = filename + "_name"
-        if filename == "CourseSelectSceneLayout":
-            full_path_of_file = os.path.join(unpacked_folder, 'romfs', 'LayoutData', 'CourseSelectSceneLayout', 'layout', 'blyt', 'CourseSelectSceneLayout.bflyt')
-        elif filename == "StageSceneLayout":
-            full_path_of_file = os.path.join(unpacked_folder, 'romfs', 'LayoutData', 'StageSceneLayout', 'layout', 'blyt', 'StageSceneLayout.bflyt')
-        elif filename == "SingleModeSceneLayout":
-            full_path_of_file = os.path.join(unpacked_folder, 'romfs', 'LayoutData', 'SingleModeSceneLayout', 'layout', 'blyt', 'SingleModeSceneLayout.bflyt')
+        if command == "shift_x":
+            full_path_of_file = os.path.join(unpacked_folder, 'romfs', 'LayoutData', filename, 'layout', 'blyt', f'{filename}.bflyt')
         else:
             full_path_of_file = file_paths.get(modified_name)
         with open(full_path_of_file, 'rb') as f:
