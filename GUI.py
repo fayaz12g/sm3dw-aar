@@ -54,6 +54,8 @@ ar_numerator = StringVar(value="16")
 ar_denominator = StringVar(value="9")
 do_disable_fxaa = BooleanVar(value=True)
 do_disable_dynamicres = BooleanVar(value=True)
+do_disable_dof = BooleanVar(value=True)
+do_disable_bloom = BooleanVar(value=True)
 do_screenshot = BooleanVar(value=True)
 
 
@@ -309,7 +311,7 @@ def select_mario_folder():
     download_extract_copy(input_folder, mod_name)
 
     # Create the PCHTXT Files
-    visual_fixes = create_visuals(do_screenshot.get(), do_disable_fxaa.get(), do_disable_dynamicres.get())
+    visual_fixes = create_visuals(do_screenshot.get(), do_disable_fxaa.get(), do_disable_dynamicres.get(), do_disable_dof.get(), do_disable_bloom.get())
     create_patch_files(patch_folder, str(ratio_value), str(scaling_factor), visual_fixes)
     romfs_folder = os.path.join(input_folder, mod_name, "romfs", "LayoutData")
     theromfs_folder = os.path.join(input_folder, mod_name, "romfs")
@@ -373,6 +375,8 @@ def pack_widgets():
     fxaa_checkbox.pack(padx=5, pady=5)
     screenshot_checkbox.pack(padx=5, pady=5)
     dynamicres_checkbox.pack(padx=10, pady=10)
+    dof_checkbox.pack(padx=10, pady=10)
+    bloom_checkbox.pack(padx=10, pady=10)
     
     image_label.pack()
 
@@ -435,6 +439,8 @@ def forget_packing():
     fxaa_checkbox.pack_forget()
     screenshot_checkbox.pack_forget()
     dynamicres_checkbox.pack_forget()
+    dof_checkbox.pack_forget()
+    bloom_checkbox.pack_forget()
 
     image_label.pack_forget()
     image_layout_label.pack_forget()
@@ -510,8 +516,10 @@ denominator_entry.bind("<FocusIn>", lambda event: handle_focus_in(denominator_en
 denominator_entry.bind("<FocusOut>", lambda event: handle_focus_out(denominator_entry, "9"))
 
 fxaa_checkbox = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="Disable FXAA", variable=do_disable_fxaa)
-screenshot_checkbox = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="Screenshot Mode Graphics (LOD Improve)", variable=do_screenshot)
+screenshot_checkbox = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="LOD Increase (Higher Fidelity)", variable=do_screenshot)
 dynamicres_checkbox = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="Disable Dynamic Resolution", variable=do_disable_dynamicres)
+dof_checkbox = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="Disable Depth of Field (DOF)", variable=do_disable_dof)
+bloom_checkbox = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="Disable Bloom Effect", variable=do_disable_bloom)
 
 ##########################
 ####### Controller #######
