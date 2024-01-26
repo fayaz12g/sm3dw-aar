@@ -685,7 +685,7 @@ notebook.add("Credits")
 
 credits_label = ClickableLabel(master=notebook.tab("Credits"), text=
                     ('Utility created by fayaz\n'
-                     'https://github.com/fayaz12g/totk-aar\n'
+                     'https://github.com/fayaz12g/sm3dw-aar\n'
                      'ko-fi.com/fayaz12\n'
                      '\n\nWith special help from\n'
                      'Christopher Fields (cfields7)\n'
