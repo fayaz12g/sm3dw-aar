@@ -50,9 +50,9 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
     blyt_folder = os.path.abspath(os.path.join(unpacked_folder))
     file_names_stripped = []
     
-    do_not_scale_rootpane = ['CounterShine', 'CounterMiss', 'CounterPiece', 'CounterCollectCoin', 'CounterCoin', 'CounterLife', 'MapMini', 'CounterLifeKids', 'KidsMode', 'CounterLifeUp', 'BgmList', 'OptionProcess', 'OptionConfig', 'OptionLanguage', 'OptionData', 'OptionMode', 'BootLoading', 'CinemaCaption', 'FooterParts', 'PlayGuide', 'Menu', 'MenuGuide', 'ContinueLoading', 'MapFooter', 'MapBG', 'FadeBlack', 'FadeWhite', 'CommonBgParts', 'ShopBG'] # panes that should be stretched across the screen, like bottom bars
+    do_not_scale_rootpane = ['WipeFadeBlack', 'WipeFadeWhite', 'WipeMystery', 'WipeMiss', "WipeNetwork", "WipeCurtainStart", "WipeCurtainResult", 'WipeCurtainRanking', 'WipeCurtainRankingParts', 'WipeCasino', 'WipeFairy', 'WipeKnoko', "WipeMissSingleMode", 'WipeNetwork', 'WipeCurtainDemo']
    
-    rootpane_by_y = ["WipeCircle", "WipeMiss", "WipeSkip", "WipeResultGrand", "WipeWorldSelect", "WipeWorldSelectCapture", "WipeResultMain", 'BootLoading']
+    rootpane_by_y = ['WipeCircle']
 
     for root, dirs, files in os.walk(blyt_folder):
         for file_name in files:
@@ -80,7 +80,7 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
                 patch_blyt(name, 'RootPane', 'scale_y', 1/s1)
                 patch_blyt(name, 'RootPane', 'scale_x', 1)
 
-        # patch_blyt('TalkMessage', 'RootPane', 'scale_x', 1/s4)
+        patch_blyt('TitleLogo', 'ParControlGuideBar', 'scale_x', 1/s1)
         # patch_blyt('TalkMessageOver', 'RootPane', 'scale_x', 1/s4)
         # patch_blyt('TalkMessage', 'Message', 'scale_x', s4)
         # patch_blyt('TalkMessageOver', 'Message', 'scale_x', s4)
@@ -126,23 +126,24 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
         # patch_blyt('CounterShine', 'RootPane', 'scale_x', s1) 
 
         if HUD_pos == 'corner':
-            # print("Shifitng elements for corner HUD")
-            # patch_blyt('MapMini', 'RootPane', 'shift_x', 660*s2) 
-            # patch_blyt('CounterLife', 'RootPane', 'shift_x', 660*s2) 
-            # patch_blyt('CounterCoin', 'RootPane', 'shift_x', -660*s2) 
-            # patch_blyt('CounterShine', 'RootPane', 'shift_x', -660*s2) 
-            # patch_blyt('SaveMessage', 'All', 'shift_x', -660*s2) 
-            # patch_blyt('CounterCollectCoin', 'All', 'shift_x', -660*s2) 
-            # patch_blyt('Menu', 'ParLogo', 'shift_x', -620) 
-            # patch_blyt('Menu', 'List', 'shift_x', -700) 
-            # # patch_blyt('ControllerGuideSnapshot', 'Capture01', 'shift_x', -660*s2) DNW
-            # patch_blyt('CounterLifeUp', 'RootPane', 'shift_x', 660*s2) 
-            # patch_blyt('KidsMode', 'RootPane', 'shift_x', 660*s2) 
-            # patch_blyt('CounterLifeKids', 'RootPane', 'shift_x', 660*s2) 
-            # # patch_blyt('WorldSelect', 'ParCounter', 'shift_x', 660*s2) DNW
-            # patch_blyt('ContinueLoading', 'HomeIcon', 'shift_x', -660*s2) 
-            # patch_blyt('ContinueLoading', 'ParLogo', 'shift_x', -660*s2) 
-            print("hello")
+            print("Shifitng elements for corner HUD")
+            patch_blyt('SingleModeSceneLayout', 'CounterCoin', 'shift_x', -660*s2) 
+            patch_blyt('SingleModeSceneLayout', 'CounterGoalItem', 'shift_x', -660*s2) 
+            patch_blyt('SingleModeSceneLayout', 'CounterScenarioShine', 'shift_x', -660*s2) 
+            patch_blyt('SingleModeSceneLayout', 'ChallengeTimner', 'shift_x', -660*s2) 
+            patch_blyt('SingleModeSceneLayout', 'Menu', 'shift_x', 660*s2) 
+            patch_blyt('CourseSelectSceneLayout', 'Menu', 'shift_x', 660*s2) 
+            patch_blyt('CourseSelectSceneLayout', 'World', 'shift_x', -660*s2) 
+            patch_blyt('CourseSelectSceneLayout', 'Counters', 'shift_x', -660*s2) 
+            patch_blyt('CourseSelectSceneLayout', 'CounterGreenStarTotal', 'shift_x', -660*s2) 
+            patch_blyt('StageSceneLayout', 'CounterCoin', 'shift_x', -660*s2) 
+            patch_blyt('StageSceneLayout', 'CounterPlayer', 'shift_x', -660*s2) 
+            patch_blyt('StageSceneLayout', 'CounterGreenStar', 'shift_x', -660*s2) 
+            patch_blyt('StageSceneLayout', 'ItemStock', 'shift_x', -660*s2) 
+            patch_blyt('StageSceneLayout', 'CounterTime', 'shift_x', 660*s2) 
+            patch_blyt('StageSceneLayout', 'CounterScore', 'shift_x', 660*s2) 
+            patch_blyt('StageSceneLayout', 'NetworkQuality', 'shift_x', 660*s2) 
+
             
     else:
         s1 = aspect_ratio / (16/9)
