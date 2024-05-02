@@ -30,7 +30,7 @@ def create_patch_files(patch_folder, ratio_value, scaling_factor, visual_fixes):
 008B6C20 A802A872'''
 
         elif version_variable == "1.1.0":
-            nsobidid = "9F7EFC2FB9653E5CDE03030478F23EDA7D18EF44"
+            nsobidid = "891687F016A18F1773D4A88EBF8A973C8E33ECC1"
             visual_fix = visual_fixesb
             fixes = f'''00901638 {asm_to_hex(f'movz w28, #0x{special_hex2}')}
 0090163c {asm_to_hex(f'movz w28, #0x{special_hex1}, lsl #16')}
