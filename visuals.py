@@ -70,13 +70,13 @@ def create_visuals(do_screenshot, do_disable_fxaa, do_disable_dynamicres, do_dis
 @disabled
 
 // Disable Bloom Effect
-@disabled
-008193B0 C0035FD6
+@{disablebloom}
+003fccbc 29008052
 @disabled
 
 // Disable DOF
-@disabled
-00888AB0 C0035FD6
+@{disabledof}
+0088ECB0 C0035FD6
 @stop
 '''
 

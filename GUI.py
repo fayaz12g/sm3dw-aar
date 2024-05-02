@@ -526,7 +526,7 @@ fxaa_checkbox = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="
 screenshot_checkbox = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="LOD Increase (Higher Fidelity)", variable=do_screenshot)
 dynamicres_checkbox = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="Disable Dynamic Resolution", variable=do_disable_dynamicres)
 dof_checkbox = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="Disable Depth of Field (DOF)", variable=do_disable_dof)
-bloom_checkbox = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="Disable Bloom Effect", variable=do_disable_bloom)
+bloom_checkbox = customtkinter.CTkCheckBox(master=notebook.tab("Visuals"), text="60FPS Handhled", variable=do_disable_bloom)
 
 ##########################
 ####### Controller #######
