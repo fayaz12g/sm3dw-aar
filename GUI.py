@@ -30,6 +30,7 @@ import shutil
 import psutil
 from visuals import create_visuals
 from controller import controller_files
+import pyautogui
 
 #######################
 #### Create Window ####
