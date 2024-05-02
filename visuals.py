@@ -26,24 +26,24 @@ def create_visuals(do_screenshot, do_disable_fxaa, do_disable_dynamicres, do_dis
 @{screenshot}
 00927BFC 28008052
 00874AC0 29008052
-@stop
+@disabled
 
 // Disable FXAA
 @{disablefxaa}
 00950CE8 09008052
 00950CC0 09008052
-@stop
+@disabled
 
 // Disable Dynamic Resolution
 @{disabledynamicres}
 007FC380 C0035FD6
 007FC1E0 C0035FD6
-@stop
+@disabled
     
 // Disable Bloom Effect
 @{disablebloom}
 008193B0 C0035FD6
-@stop
+@disabled
 
 // Disable DOF
 @{disabledof}
@@ -56,23 +56,23 @@ def create_visuals(do_screenshot, do_disable_fxaa, do_disable_dynamicres, do_dis
 @disabled
 00927BFC 28008052
 00874AC0 29008052
-@stop
+@disabled
 
 // Disable FXAA
 @disabled
 00B92318 08000014
-@stop
+@disabled
 
 // Disable Dynamic Resolution
 @disabled
 007FC380 C0035FD6
 007FC1E0 C0035FD6
-@stop
+@disabled
 
 // Disable Bloom Effect
 @disabled
 008193B0 C0035FD6
-@stop
+@disabled
 
 // Disable DOF
 @disabled

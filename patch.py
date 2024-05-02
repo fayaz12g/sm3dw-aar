@@ -49,7 +49,7 @@ def create_patch_files(patch_folder, ratio_value, scaling_factor, visual_fixes):
 0091CFCC A902A8F2
 008B6C1C A8AA8A52
 008B6C20 A802A872
-@stop
+@disabled
 
 {visual_fix}
 
