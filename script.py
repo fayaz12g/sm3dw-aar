@@ -25,7 +25,7 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
         print(f"{command} {pane} of {filename}")
         offset_dict = {'shift_x': 0x40, 'shift_y': 0x48, 'scale_x': 0x70, 'scale_y': 0x78} 
         modified_name = filename + "_name"
-        if operation == "shift_x":
+        if operation == "shift_x" or  operation == "shift_y":
             full_path_of_file = os.path.join(unpacked_folder, 'romfs', 'LayoutData', filename, 'layout', 'blyt', f'{filename}.bflyt')
         else:
             full_path_of_file = file_paths.get(modified_name)
@@ -164,8 +164,8 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
 
         if HUD_pos == 'corner':
             print("Shifitng elements for corner HUD")
-            patch_blyt('TitleLogo', 'Buttons', 'scale_y', -240/s1)
-            patch_blyt('TitleLogo', 'ParButtonLuigiBros', 'scale_y', -300/s1)
+            patch_blyt('TitleLogo', 'Buttons', 'shift_y', -240/s1)
+            patch_blyt('TitleLogo', 'ParButtonLuigiBros', 'shift_y', -300/s1)
             patch_blyt('SingleModeSceneLayout', 'CounterCoin', 'shift_y', -230/s1)
             patch_blyt('SingleModeSceneLayout', 'ShardCounter', 'shift_y', -376/s1)
             patch_blyt('SingleModeSceneLayout', 'CounterGoalItem', 'shift_y', 257/s1)

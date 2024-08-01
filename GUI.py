@@ -235,7 +235,7 @@ def check_process_running(process_name):
     return False
 
 scaling_factor = 0.762
-HUD_pos = "corner"
+HUD_pos = "center"
 
 def handle_focus_in(entry, default_text):
     if entry.get() == default_text:
