@@ -8,7 +8,8 @@ def create_patch_files(patch_folder, ratio_value, scaling_factor, visual_fixes, 
     HUD_pos = str(HUD_pos)
     scaling_factor = float(scaling_factor)
     ratio_value = float(ratio_value)
-    ratio_value += (abs(ratio_value - (16/9)) / 2)
+    ogratio_value = float(ratio_value)
+    # ratio_value += (abs(ratio_value - (16/9)) / 2)
     print(f"The scaling factor is {scaling_factor}.")
     hex_value = make_hex(ratio_value, 0)
     hex_value2 = make_hex(ratio_value, 3)
@@ -24,7 +25,7 @@ def create_patch_files(patch_folder, ratio_value, scaling_factor, visual_fixes, 
             replacement_value = "008FADE0"
             replacement2_value = "009692D0"
             visual_fix = visual_fixesa
-            if HUD_pos == "corner" or float(ratio_value) < 16/9:
+            if HUD_pos == "corner" or float(ogratio_value) < 16/9:
                 fixes = f'''{replacement_value} {hex_value}
 {replacement2_value} {hex_value2}
 0091CFC8 A9AA8AD2
@@ -42,7 +43,7 @@ def create_patch_files(patch_folder, ratio_value, scaling_factor, visual_fixes, 
         elif version_variable == "1.1.0":
             nsobidid = "891687F016A18F1773D4A88EBF8A973C8E33ECC1"
             visual_fix = visual_fixesb
-            if HUD_pos == "corner" or float(ratio_value) < 16/9:
+            if HUD_pos == "corner" or float(ogratio_value) < 16/9:
                 fixes = f'''00901638 {asm_to_hex(f'movz w28, #0x{special_hex2}')}
 0090163c {asm_to_hex(f'movz w28, #0x{special_hex1}, lsl #16')}
 00901640 8003271E

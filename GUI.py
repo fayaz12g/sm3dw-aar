@@ -290,7 +290,7 @@ def select_mario_folder():
     if os.path.exists(text_folder):
         shutil.rmtree(text_folder)
 
-    if HUD_pos == "corner" or float(ratio_value) < 16/9:
+    if HUD_pos == "corner":
         # Download the SM3DW+BF Layout Files
         download_extract_copy(input_folder, mod_name)
 
@@ -304,7 +304,7 @@ def select_mario_folder():
         # Download and put Controller Files in Place
         controller_files(controller_type.get(), theromfs_folder)
 
-    if HUD_pos == "corner" or float(ratio_value) < 16/9:
+    if HUD_pos == "corner":
         # Decomperss SZS and Lyarc Files
         for file in os.listdir(romfs_folder):
             if file.lower().endswith(".szs"):
