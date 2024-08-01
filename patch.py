@@ -44,14 +44,12 @@ def create_patch_files(patch_folder, ratio_value, scaling_factor, visual_fixes, 
             nsobidid = "891687F016A18F1773D4A88EBF8A973C8E33ECC1"
             visual_fix = visual_fixesb
             if HUD_pos == "corner" or float(ogratio_value) < 16/9:
-                fixes = f'''00901638 {asm_to_hex(f'movz w28, #0x{special_hex2}')}
-0090163c {asm_to_hex(f'movz w28, #0x{special_hex1}, lsl #16')}
-00901640 8003271E
-009701B0 {asm_to_hex(f'fmov s3, #{rounded_ratio}')}
-009237C8 {asm_to_hex(f'movz x9, #0x{special_hex2}')}
-009237CC {asm_to_hex(f'movk x9, #0x{special_hex1}, lsl #16')}
-008BD0FC {asm_to_hex(f'movz w8, #0x{special_hex2}')}
-008BD100 {asm_to_hex(f'movk w8, #0x{special_hex1}, lsl #16')}'''
+                fixes = f'''008FADE0 {hex_value}
+009692D0 {hex_value2}
+0091CFC8 A9AA8AD2
+0091CFCC A902A8F2
+008B6C1C A8AA8A52
+008B6C20 A802A872'''
             else:
                 fixes = f'''00901638 {asm_to_hex(f'movz w28, #0x{special_hex2}')}
 0090163c {asm_to_hex(f'movz w28, #0x{special_hex1}, lsl #16')}

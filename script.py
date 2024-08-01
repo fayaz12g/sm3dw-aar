@@ -1,12 +1,13 @@
 import os
 import struct
+from functions import *
 
 def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
     unpacked_folder = str(unpacked_folder)
     aspect_ratio = float(aspect_ratio)
     print(f"Aspect ratio is {aspect_ratio}")
     HUD_pos = str(HUD_pos)
-     
+    
     def float2hex(f):
         return hex(struct.unpack('>I', struct.pack('<f', f))[0]).lstrip('0x').rjust(8,'0').upper()
 
@@ -159,45 +160,16 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
             if name not in do_not_scale_rootpane:
                 patch_blyt(name, 'RootPane', 'scale_y', s1)
              
-        # # patch_blyt('TalkMessage', 'PicBase', 'scale_y', 1/s1)
-        # patch_blyt('PlayGuide', 'PicBase', 'scale_y', 1/s1)
-        # patch_blyt('PlayGuideMovie', 'PicMovie', 'scale_y', 1/s1)
-        # patch_blyt('PlayGuide', 'PicBase', 'scale_y', 1/s1)
-        # patch_blyt('CinemaCaption', 'All', 'scale_y', s1)
-        # patch_blyt('CinemaCaption', 'PicCaptureUse', 'scale_y', 1/s1)
-        # patch_blyt('BootLoading', 'ParBG', 'scale_y', 1/s1) # joycon boot screen
-        # patch_blyt('ContinueLoading', 'PicFooter', 'scale_y', 1/s1)
-        # patch_blyt('ContinueLoading', 'PicFooterBar', 'scale_y', 1/s1)
-        # patch_blyt('ContinueLoading', 'PicProgressBar', 'scale_y', 1/s1)
-        # patch_blyt('ContinueLoading', 'ParBG', 'scale_y', 1/s1)
-        # patch_blyt('ContinueLoading', 'ParBG', 'scale_x', 1/s1)
-        # patch_blyt('Menu', 'Capture', 'scale_y', 1/s1)
-        # # patch_anim('Menu', 'Capture', 'scale_x', 1/s1)
-        # # patch_blyt('OptionSelect', 'Capture', 'scale_y', 1/s1)
-        # patch_blyt('OptionMode', 'Capture', 'scale_y', 1/s1)
-        # patch_blyt('OptionData', 'Capture', 'scale_y', 1/s1)
-        # patch_blyt('OptionLanguage', 'Capture', 'scale_y', 1/s1)
-        # patch_blyt('OptionConfig', 'Capture', 'scale_y', 1/s1)
-        # patch_blyt('OptionProcess', 'Capture', 'scale_y', 1/s1)
-        # patch_blyt('TalkMessage', 'PicBase', 'scale_y', 1/s1)
-        # patch_blyt('TalkMessageOver', 'PicBase', 'scale_y', 1/s1)
-        # patch_blyt('WorldSelect', 'PicBase', 'scale_y', 1/s1)
-        # patch_blyt('StaffRoll', 'PicBG', 'scale_y', 1/s1)
-        # patch_blyt('CommonBgParts', 'PicMapCap', 'scale_y', s1)
+        patch_blyt('TitleLogo', 'ParControlGuideBar', 'scale_y', 1/s1)
 
-        # if HUD_pos == 'corner':
-        #     print("Shifitng elements for corner HUD")
-        #     patch_blyt('TalkMessage', 'PicBase', 'shift_y', -540*s2)
-        #     patch_blyt('MapMini', 'RootPane', 'shift_y', 540*s2) 
-        #     patch_blyt('CounterLife', 'RootPane', 'shift_y', 540*s2) 
-        #     patch_blyt('CounterCoin', 'RootPane', 'shift_y', 540*s2) 
-        #     patch_blyt('SaveMessage', 'All', 'shift_y', -540*s2) 
-        #     patch_blyt('CounterCollectCoin', 'RootPane', 'shift_y', 540*s2) 
-        #     patch_blyt('Menu', 'ParLogo', 'shift_y', 540*s2) 
-        #     patch_blyt('CounterLifeUp', 'RootPane', 'shift_y', 540*s2) 
-        #     patch_blyt('KidsMode', 'RootPane', 'shift_y', 540*s2) 
-        #     patch_blyt('CounterLifeKids', 'RootPane', 'shift_y', 540*s2) 
-        #     patch_blyt('WorldSelect', 'ParCounter', 'shift_y', 540*s2) 
-        #     patch_blyt('ContinueLoading', 'HomeIcon', 'shift_y', 540*s2) 
-        #     patch_blyt('ContinueLoading', 'ParLogo', 'shift_y', 540*s2) 
-        #     patch_blyt('Shop', 'ParFooter', 'shift_y', -540*s2) 
+        if HUD_pos == 'corner':
+            print("Shifitng elements for corner HUD")
+            patch_blyt('TitleLogo', 'Buttons', 'scale_y', -240/s1)
+            patch_blyt('TitleLogo', 'ParButtonLuigiBros', 'scale_y', -300/s1)
+            patch_blyt('SingleModeSceneLayout', 'CounterCoin', 'shift_y', -230/s1)
+            patch_blyt('SingleModeSceneLayout', 'ShardCounter', 'shift_y', -376/s1)
+            patch_blyt('SingleModeSceneLayout', 'CounterGoalItem', 'shift_y', 257/s1)
+            patch_blyt('SingleModeSceneLayout', 'CounterScenarioShine', 'shift_y', 214/s1)
+            patch_blyt('SingleModeSceneLayout', 'ChallengeTimer', 'shift_y', 416/s1)
+            patch_blyt('SingleModeSceneLayout', 'Menu', 'shift_y', 271/s1)
+            patch_blyt('SingleModeSceneLayout', 'ItemStock', 'shift_y', 6/s1)

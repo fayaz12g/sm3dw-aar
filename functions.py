@@ -36,3 +36,25 @@ def calculate_rounded_ratio(ratio_value):
     else:
         rounded_ratio = round(ratio_value * 4) / 4
     return rounded_ratio
+
+def scale_position(direction, distance, new_ratio):
+    """
+    Scale the position of an element when changing aspect ratios.
+    
+    :param direction: 'x' or 'y' to indicate which axis to scale
+    :param distance: The original distance from the center
+    :param new_ratio: The ratio to scale to (e.g., 0.75 for 4:3 from 16:9)
+    :return: The new scaled distance
+    """
+    if direction not in ['x', 'y']:
+        raise ValueError("Direction must be either 'x' or 'y'")
+    
+    if direction == 'x':
+        # X-axis scaling is not affected
+        return distance
+    elif direction == 'y':
+        # Y-axis scaling
+        return distance / new_ratio
+    
+    # This line should never be reached due to the initial check
+    return None
