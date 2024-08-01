@@ -10,10 +10,11 @@ def create_patch_files(patch_folder, ratio_value, scaling_factor, visual_fixes, 
     ratio_value = float(ratio_value)
     ogratio_value = float(ratio_value)
     ratio_value += (abs(ratio_value - (16/9)) / 2)
+    inverse_ratio = 1/ogratio_value
     print(f"The scaling factor is {scaling_factor}.")
     hex_value = make_hex(ogratio_value, 0)
     hex_value2 = make_hex(ogratio_value, 3)
-    rounded_ratio = calculate_rounded_ratio(ratio_value)
+    rounded_ratio = calculate_rounded_ratio(inverse_ratio)
     special_hex1, special_hex2 = make_specials(ratio_value)
     version_variables = ["1.0.0", "1.1.0"]
     for version_variable in version_variables:
