@@ -637,8 +637,6 @@ center_checkbox = customtkinter.CTkRadioButton(master=notebook.tab("HUD"), text=
 corner_checkbox = customtkinter.CTkRadioButton(master=notebook.tab("HUD"), text="Corner", variable=corner_HUD, value=2, command=lambda: [centered_HUD.set(False), repack_widgets])
 corner_checkbox.select()
 
-notebook.delete("HUD") # Remove this line after adding HUD element shifting
-
 ########################
 ####### GENERATE #######
 ########################
