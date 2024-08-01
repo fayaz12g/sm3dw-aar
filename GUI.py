@@ -290,8 +290,9 @@ def select_mario_folder():
     if os.path.exists(text_folder):
         shutil.rmtree(text_folder)
 
-    # # Download the SM3DW+BF Layout Files
-    # download_extract_copy(input_folder, mod_name)
+    if HUD_pos == "corner" or float(ratio_value) < 16/9:
+        # Download the SM3DW+BF Layout Files
+        download_extract_copy(input_folder, mod_name)
 
     # Create the PCHTXT Files
     visual_fixes = create_visuals(do_screenshot.get(), do_disable_fxaa.get(), do_disable_dynamicres.get(), do_disable_dof.get(), do_disable_bloom.get())
@@ -299,8 +300,9 @@ def select_mario_folder():
     romfs_folder = os.path.join(input_folder, mod_name, "romfs", "LayoutData")
     theromfs_folder = os.path.join(input_folder, mod_name, "romfs")
 
-    # Download and put Controller Files in Place
-    controller_files(controller_type.get(), theromfs_folder)
+    if controller_type.get() != 'Switch':
+        # Download and put Controller Files in Place
+        controller_files(controller_type.get(), theromfs_folder)
 
     if HUD_pos == "corner" or float(ratio_value) < 16/9:
         # Decomperss SZS and Lyarc Files
