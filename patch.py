@@ -7,7 +7,10 @@ def create_patch_files(patch_folder, ratio_value, scaling_factor, visual_fixes):
     visual_fixesb = visual_fixes[1]
     scaling_factor = float(scaling_factor)
     ratio_value = float(ratio_value)
-    ratio_value = ((ratio_value - (16/9)) / 2) + ratio_value
+    if ratio_value > (16/9):
+        ratio_value = ratio_value + ((ratio_value - (16/9)) / 2)
+    else:
+        ratio_value = ratio_value - ((16/9 - ratio_value) / 2)
     print(f"The scaling factor is {scaling_factor}.")
     hex_value = make_hex(ratio_value, 0)
     hex_value2 = make_hex(ratio_value, 3)

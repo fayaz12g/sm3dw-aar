@@ -36,7 +36,7 @@ import pyautogui
 #### Create Window ####
 #######################
 
-tool_version = "1.1.0"
+tool_version = "1.1.1"
 
 root = customtkinter.CTk()
 root.title(f"Fayaz's Settings {tool_version} for Super Mario 3D World + Bowser's Fury")
