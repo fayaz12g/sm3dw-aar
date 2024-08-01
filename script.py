@@ -157,7 +157,6 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
             if name in do_not_scale_rootpane:
                 print(f"Skipping root pane scaling of {name}")
             if name not in do_not_scale_rootpane:
-                print(f"Scaling root pane vertically for {name}")
                 patch_blyt(name, 'RootPane', 'scale_y', s1)
              
         # # patch_blyt('TalkMessage', 'PicBase', 'scale_y', 1/s1)
