@@ -317,7 +317,7 @@ def select_mario_folder():
         # Compress layout folders and delete them
         for root, dirs, files in os.walk(input_folder):
             if "layout" in dirs:
-                level = 1
+                level = -1
                 layout_folder_path = os.path.join(root, "layout")
                 layout_lyarc_path = os.path.join(root, "layout.lyarc")
                 pack_folder_to_blarc(layout_folder_path, layout_lyarc_path, level)
