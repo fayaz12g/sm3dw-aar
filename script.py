@@ -28,11 +28,12 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
             modified_name = filename + "_name"
             paths = file_paths.get(modified_name, [])
             
-            if not paths:
-                default_path = os.path.join(unpacked_folder, "romfs", "LayoutData", filename, "layout", "blyt", f"{filename}.bflyt")
-                paths.append(default_path)
+            new_paths = {}
             
-            for full_path_of_file in paths:
+            default_path = os.path.join(unpacked_folder, "romfs", "LayoutData", filename, "layout", "blyt", f"{filename}.bflyt")
+            new_paths[default_path] = filename
+            
+            for full_path_of_file in new_paths:
                 with open(full_path_of_file, 'rb') as f:
                     content = f.read().hex()
                 
