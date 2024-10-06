@@ -7,9 +7,51 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
     aspect_ratio = float(aspect_ratio)
     print(f"Aspect ratio is {aspect_ratio}")
     HUD_pos = str(HUD_pos)
-    
-    def float2hex(f):
-        return hex(struct.unpack('>I', struct.pack('<f', f))[0]).lstrip('0x').rjust(8,'0').upper()
+
+    layout_map = {
+                    'SingleModeSceneLayout': ['CounterCoin', 'CounterGoalItem', 'CounterScenarioShine', 'ChallengeTimer', 'Menu'],
+                    'CourseSelectSceneLayout': ['Menu', 'World', 'Counters', 'CounterGreenStarTotal'],
+                    'StageSceneLayout': ['CounterCoin', 'CounterPlayer', 'CounterGreenStar', 'ItemStock', 'CounterTime', 'CounterScore', 'NetworkQuality'],
+                }
+
+    def patch_ui_layouts(direction):
+        if direction == "x":
+            offset = 0x40
+        if direction == 'y':
+            offset = 0x48
+
+        for filename, panes in layout_map.items():
+            modified_name = filename + "_name"
+            paths = file_paths.get(modified_name, [])
+            
+            if not paths:
+                default_path = os.path.join(unpacked_folder, "romfs", "LayoutData", filename, "layout", "blyt", f"{filename}.bflyt")
+                paths.append(default_path)
+            
+            for full_path_of_file in paths:
+                with open(full_path_of_file, 'rb') as f:
+                    content = f.read().hex()
+                
+                start_rootpane = content.index(b'RootPane'.hex())
+                
+                for pane in panes:
+                    pane_hex = pane.encode('utf-8').hex()
+                    start_pane = content.index(pane_hex, start_rootpane)
+                    idx = start_pane + offset 
+                    
+                    current_value_hex = content[idx:idx+8]
+                    current_value = hex2float(current_value_hex)
+                    
+                    new_value = (current_value * s1**-1)
+                    new_value_hex = float2hex(new_value)
+
+                    if pane == "L_SetItem_00" or pane == "L_SetItem_01" or pane == "L_SetItem_02" :
+                        print(pane, current_value, new_value)
+                    
+                    content = content[:idx] + new_value_hex + content[idx+8:]
+                
+                with open(full_path_of_file, 'wb') as f:
+                    f.write(bytes.fromhex(content))
 
     def patch_blyt(filename, pane, operation, value):
         if operation == "scale_x" or operation == "scale_y":
@@ -69,7 +111,8 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
 
     
     if aspect_ratio >= 16/9:
-        s1 = (((((aspect_ratio * 9) - 16) / 2) + 16) / 9)  / aspect_ratio
+        # (((((aspect_ratio * 9) - 16) / 2) + 16) / 9)  / aspect_ratio
+        s1 = (16 / 9)  / aspect_ratio
         print(f"Scaling factor is set to {s1}")
         s2 = 1-s1
         s3 = s2/s1
@@ -85,68 +128,11 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
                 patch_blyt(name, 'RootPane', 'scale_x', 1)
 
         patch_blyt('TitleLogo', 'ParControlGuideBar', 'scale_x', 1/s1)
-        # patch_blyt('TalkMessageOver', 'RootPane', 'scale_x', 1/s4)
-        # patch_blyt('TalkMessage', 'Message', 'scale_x', s4)
-        # patch_blyt('TalkMessageOver', 'Message', 'scale_x', s4)
-        # patch_blyt('PlayGuide', 'PicBase', 'scale_x', 1/s4)
-        # patch_blyt('PlayGuideMovie', 'PicMovie', 'scale_x', 1/s4)
-        # # patch_blyt('CinemaCaption', 'All', 'scale_x', s1)
-        # # patch_blyt('CinemaCaption', 'PicCaptureUse', 'scale_x', 1/s1)
-        # # patch_blyt('BootLoading', 'ParBG', 'scale_x', s1) # joycon boot screen
-        # # patch_blyt('ContinueLoading', 'PicFooter', 'scale_x', 1/s1)
-        # # patch_blyt('ContinueLoading', 'PicFooterBar', 'scale_x', 1/s1)
-        # # patch_blyt('ContinueLoading', 'PicProgressBar', 'scale_x', 1/s1)
-        # # patch_blyt('ContinueLoading', 'ParBG', 'scale_x', 1/s1)
-        # # patch_blyt('ContinueLoading', 'ParBG', 'scale_y', 1/s1)
-        # # patch_blyt('Menu', 'Capture', 'scale_x', s1) DNW
-        # # patch_anim('Menu', 'Capture', 'scale_x', 1/s1) DNW
-        # patch_blyt('Menu', 'ParLogo', 'scale_x', s1) 
-        # patch_blyt('Menu', 'List', 'scale_x', s1) 
-        # # patch_blyt('OptionSelect', 'Capture', 'scale_x', 1/s1) DNW
-        # # patch_blyt('OptionMode', 'Capture', 'scale_x', s1)
-        # # patch_blyt('OptionData', 'Capture', 'scale_x', s1)
-        # # patch_blyt('OptionLanguage', 'Capture', 'scale_x', s1)
-        # # patch_blyt('OptionConfig', 'Capture', 'scale_x', s1)
-        # # patch_blyt('OptionProcess', 'Capture', 'scale_x', s1)
-        # # patch_blyt('WorldSelect', 'PicBase', 'scale_x', 1/s1) DNW
-        # # patch_blyt('StaffRoll', 'PicBG', 'scale_x', 1/s1) DNW
-        # # patch_blyt('CommonBgParts', 'PicMapCap', 'scale_x', 1/s1)
-        # patch_blyt('Menu', 'ParBG', 'scale_x', 1/s1)
-        # # patch_anim('Menu', 'Menu_Wait', 416, 285 + 540*s3)
-        # # patch_anim('Menu', 'Menu_Boot', 416, 285 + 540*s3)
-        # # patch_anim('Menu', 'Menu_SelectPause', 416, 285 + 540*s3)
-        # # patch_anim('Menu', 'Menu_Appear', 416, 285 + 540*s3)
-        # # patch_anim('Menu', 'Menu_End', 416, 285 + 540*s3)
-        # # patch_anim('Menu', 'Menu_SelectTitle', 416, 285 + 540*s3)
-        # patch_blyt('CounterLifeUp', 'RootPane', 'scale_x', s1) 
-        # patch_blyt('KidsMode', 'RootPane', 'scale_x', s1) 
-        # patch_blyt('CounterLifeKids', 'RootPane', 'scale_x', s1) 
-        # patch_blyt('MapMini', 'RootPane', 'scale_x', s1) 
-        # patch_blyt('CounterLife', 'RootPane', 'scale_x', s1) 
-        # patch_blyt('CounterCoin', 'RootPane', 'scale_x', s1) 
-        # patch_blyt('CounterCollectCoin', 'RootPane', 'scale_x', s1) 
-        # patch_blyt('CounterPiece', 'RootPane', 'scale_x', s1) 
-        # patch_blyt('CounterMiss', 'RootPane', 'scale_x', s1) 
-        # patch_blyt('CounterShine', 'RootPane', 'scale_x', s1) 
+   
 
         if HUD_pos == 'corner':
             print("Shifitng elements for corner HUD")
-            patch_blyt('SingleModeSceneLayout', 'CounterCoin', 'shift_x', 660*s2) 
-            patch_blyt('SingleModeSceneLayout', 'CounterGoalItem', 'shift_x', 660*s2) 
-            patch_blyt('SingleModeSceneLayout', 'CounterScenarioShine', 'shift_x', 660*s2) 
-            patch_blyt('SingleModeSceneLayout', 'ChallengeTimer', 'shift_x', 660*s2) 
-            patch_blyt('SingleModeSceneLayout', 'Menu', 'shift_x', -660*s2) 
-            patch_blyt('CourseSelectSceneLayout', 'Menu', 'shift_x', -660*s2) 
-            patch_blyt('CourseSelectSceneLayout', 'World', 'shift_x', 660*s2) 
-            patch_blyt('CourseSelectSceneLayout', 'Counters', 'shift_x', 660*s2) 
-            patch_blyt('CourseSelectSceneLayout', 'CounterGreenStarTotal', 'shift_x', 660*s2) 
-            patch_blyt('StageSceneLayout', 'CounterCoin', 'shift_x', 660*s2) 
-            patch_blyt('StageSceneLayout', 'CounterPlayer', 'shift_x', 660*s2) 
-            patch_blyt('StageSceneLayout', 'CounterGreenStar', 'shift_x', 660*s2) 
-            patch_blyt('StageSceneLayout', 'ItemStock', 'shift_x', 660*s2) 
-            patch_blyt('StageSceneLayout', 'CounterTime', 'shift_x', -660*s2) 
-            patch_blyt('StageSceneLayout', 'CounterScore', 'shift_x', -660*s2) 
-            patch_blyt('StageSceneLayout', 'NetworkQuality', 'shift_x', -660*s2) 
+            patch_ui_layouts("x")
 
             
     else:

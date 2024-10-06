@@ -5,6 +5,14 @@ import binascii
 import math
 import os
 
+def hex2float(h):
+    return struct.unpack('<f', struct.pack('>I', int(h, 16)))[0]
+
+
+def float2hex(f):
+        return hex(struct.unpack('>I', struct.pack('<f', f))[0]).lstrip('0x').rjust(8,'0').upper()
+
+
 def make_hex(x, r):
     p = math.floor(math.log(x, 2))
     a = round(16*(p-2) + x / 2**(p-4))
