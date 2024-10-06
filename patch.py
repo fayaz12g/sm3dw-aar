@@ -9,7 +9,7 @@ def create_patch_files(patch_folder, ratio_value, scaling_factor, visual_fixes, 
     scaling_factor = float(scaling_factor)
     ratio_value = float(ratio_value)
     ogratio_value = float(ratio_value)
-    ratio_value += (abs(ratio_value - (16/9)) / 2)
+    # ratio_value += (abs(ratio_value - (16/9)) / 2)
     inverse_ratio = 1/ogratio_value
     print(f"The scaling factor is {scaling_factor}.")
     hex_value = make_hex(ogratio_value, 0)

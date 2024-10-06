@@ -9,9 +9,13 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
     HUD_pos = str(HUD_pos)
 
     layout_map = {
-                    'SingleModeSceneLayout': ['CounterCoin', 'CounterGoalItem', 'CounterScenarioShine', 'ChallengeTimer', 'Menu'],
+                    'SingleModeSceneLayout': ['CounterCoin', 'CounterGoalItem', 'CounterScenarioShine', 'ChallengeTimer', 'Menu', "ItemStock", "ShardCounter"],
                     'CourseSelectSceneLayout': ['Menu', 'World', 'Counters', 'CounterGreenStarTotal'],
-                    'StageSceneLayout': ['CounterCoin', 'CounterPlayer', 'CounterGreenStar', 'ItemStock', 'CounterTime', 'CounterScore', 'NetworkQuality'],
+                    'StageSceneLayout': ['CounterCoin', 'CounterPlayer', 'CounterGreenStar', 'ItemStock', 'CounterTime', 'CounterScore', 'NetworkQuality', "CounterStamp"],
+                    'WindowProcessing': ['Capture04', 'All2', 'PicMario32_ds', 'PicMario32', 'TxtGuide'],
+                    'RCS_Loading': ['Loading'],   
+                    'RCS_NetworkLoading': ['Loading'], 
+                    'RCS_SceneSkip': ['Menu'],   
                 }
 
     def patch_ui_layouts(direction):
@@ -44,9 +48,6 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder):
                     
                     new_value = (current_value * s1**-1)
                     new_value_hex = float2hex(new_value)
-
-                    if pane == "L_SetItem_00" or pane == "L_SetItem_01" or pane == "L_SetItem_02" :
-                        print(pane, current_value, new_value)
                     
                     content = content[:idx] + new_value_hex + content[idx+8:]
                 

@@ -36,7 +36,7 @@ import pyautogui
 #### Create Window ####
 #######################
 
-tool_version = "1.1.1"
+tool_version = "1.2.1"
 
 root = customtkinter.CTk()
 root.title(f"Fayaz's Settings {tool_version} for Super Mario 3D World + Bowser's Fury")
@@ -317,7 +317,7 @@ def select_mario_folder():
         # Compress layout folders and delete them
         for root, dirs, files in os.walk(input_folder):
             if "layout" in dirs:
-                level = -1
+                level = 1
                 layout_folder_path = os.path.join(root, "layout")
                 layout_lyarc_path = os.path.join(root, "layout.lyarc")
                 pack_folder_to_blarc(layout_folder_path, layout_lyarc_path, level)
